@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #181818; /* Fundo preto */
+    color: #e5e5e5; /* Cor do texto principal */
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff; /* Cor do texto */
+    font-size: 2.5em; /* Tamanho do texto */
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra do texto */
+    font-family: 'Arial', sans-serif; /* Fonte */
+}
+
+/* Container dos posts */
+#postsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px; /* Espaço extra no final do container */
+}
+
+/* Estilo de cada post individual */
+.post {
+    background-color: #282828; /* Fundo cinza escuro */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 300px;
+    box-sizing: border-box;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post:hover {
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra mais forte ao passar o mouse */
+}
+
+.poster {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Informações do post */
+.post-info {
+    margin-top: 15px;
+}
+
+.post-info h2 {
+    font-size: 1.5em;
+    color: #ffffff; /* Título em branco */
+}
+
+.post-info p {
+    font-size: 0.9em;
+    color: #b3b3b3; /* Texto cinza claro */
+}
+
+/* Botão de detalhes */
+button {
+    background-color: #1db954; /* Verde do estilo do Letterboxd */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #17a44a; /* Efeito ao passar o mouse */
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
+
+/* Comentários */
+.comments {
+    margin-top: 15px;
+}
+
+.comment {
+    background-color: #333333; /* Fundo cinza médio */
+    color: #e5e5e5; /* Texto claro */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+/* Detalhes do filme (diretor, sinopse, etc.) */
+.film-details p {
+    font-size: 0.85em;
+    color: #cccccc; /* Texto cinza claro */
+    margin: 5px 0;
+}
