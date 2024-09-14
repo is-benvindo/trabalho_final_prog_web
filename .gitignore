@@ -1,0 +1,22 @@
+# Ignorar o diretório node_modules
+node_modules/
+
+# Ignorar o arquivo de variáveis de ambiente
+.env
+
+# Ignorar arquivos de logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Ignorar caches e temporários do sistema
+*.tmp
+*.temp
+
+# Ignorar arquivos gerados por IDEs
+.vscode/
+
+# Ignorar pacotes de lock de dependências
+yarn.lock
+package-lock.json
