@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const filmController = require('../controllers/filmController');
 
-// Rota para buscar filmes pelo título usando a API do TMDb
+// Rota para buscar filmes por título
 router.get('/filmes/:titulo', filmController.getFilmsByTitle);
 
-// Rota para buscar detalhes do filme específico (inclui diretor, sinopse, etc.)
+// Rota para buscar detalhes do filme por ID
 router.get('/filme/:id', filmController.getFilmById);
 
 // Rota para buscar filmes populares
