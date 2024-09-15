@@ -43,12 +43,17 @@ async function fetchFilmDetails(filmeId) {
         const filmDetails = await response.json();
         const detailsContainer = document.getElementById(`filmDetails-${filmeId}`);
 
-        // Exibir detalhes do filme (diretor, sinopse e avaliação)
-        detailsContainer.innerHTML = `
-            <p><strong>Diretor:</strong> ${filmDetails.director}</p>
-            <p><strong>Sinopse:</strong> ${filmDetails.synopsis}</p>
-            <p><strong>Avaliação IMDb:</strong> ${filmDetails.rating}</p>
-        `;
+        // Verificar se o container para os detalhes existe
+        if (detailsContainer) {
+            // Exibir detalhes do filme (diretor, sinopse e avaliação)
+            detailsContainer.innerHTML = `
+                <p><strong>Diretor:</strong> ${filmDetails.director}</p>
+                <p><strong>Sinopse:</strong> ${filmDetails.synopsis}</p>
+                <p><strong>Avaliação IMDb:</strong> ${filmDetails.rating}</p>
+            `;
+        } else {
+            console.error('Container de detalhes não encontrado');
+        }
     } catch (error) {
         console.log('Erro ao buscar detalhes do filme', error);
     }
