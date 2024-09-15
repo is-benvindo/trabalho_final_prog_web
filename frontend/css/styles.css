@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Ewert&family=Monoton&display=swap');
+
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
@@ -7,12 +9,12 @@ body {
 }
 
 h1 {
+    font-family: 'Bungee Shade', cursive;
     text-align: center;
     color: #ffffff; /* Cor do texto */
-    font-size: 2.5em; /* Tamanho do texto */
-    margin-bottom: 40px;
+    font-size: 4em; /* Tamanho do texto */
+    margin-bottom: 60px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra do texto */
-    font-family: 'Arial', sans-serif; /* Fonte */
 }
 
 /* Container dos posts */
@@ -61,23 +63,6 @@ h1 {
     color: #b3b3b3; /* Texto cinza claro */
 }
 
-/* Botão de detalhes */
-button {
-    background-color: #1db954; /* Verde do estilo do Letterboxd */
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-    background-color: #17a44a; /* Efeito ao passar o mouse */
-    transform: scale(1.05); /* Leve aumento ao passar o mouse */
-}
-
 /* Comentários */
 .comments {
     margin-top: 15px;
@@ -97,4 +82,21 @@ button:hover {
     font-size: 0.85em;
     color: #cccccc; /* Texto cinza claro */
     margin: 5px 0;
+}
+
+/* Botão de detalhes */
+button {
+    background-color: #1db954; /* Verde do estilo do Letterboxd */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #17a44a; /* Efeito ao passar o mouse */
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
 }
