@@ -100,3 +100,55 @@ button:hover {
     background-color: #17a44a; /* Efeito ao passar o mouse */
     transform: scale(1.05); /* Leve aumento ao passar o mouse */
 }
+
+/* Adicionando novos estilos para o formulário de busca */
+
+/* Estilo do contêiner do formulário de busca */
+#searchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Alinha verticalmente o campo e o botão */
+    margin-bottom: 30px;
+    gap: 10px; /* Adiciona espaço entre o campo e o botão */
+}
+
+/* Estilo do campo de entrada de busca */
+#searchInput {
+    font-size: 1em;
+    padding: 8px 12px; /* Ajusta o padding para um tamanho mais compacto */
+    border: 2px solid #1db954;
+    border-radius: 4px; /* Borda arredondada uniforme */
+    outline: none;
+    width: 250px; /* Largura ajustada */
+    height: 40px; /* Altura ajustada para maior proporção com o botão */
+    box-sizing: border-box; /* Inclui padding e borda na largura total */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Adiciona transição para sombra */
+}
+
+#searchInput:focus {
+    border-color: #17a44a;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra no foco */
+}
+
+/* Estilo do botão de busca */
+#searchButton {
+    font-size: 1em;
+    padding: 8px 15px; /* Ajusta o padding para maior proporção */
+    border: 2px solid #1db954;
+    border-radius: 4px; /* Borda arredondada uniforme */
+    background-color: #1db954;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.2s; /* Adiciona transição para efeito de transformação */
+    height: 40px; /* Altura ajustada para maior proporção com o campo de entrada */
+}
+
+#searchButton:hover {
+    background-color: #17a44a;
+    border-color: #17a44a;
+    transform: scale(1.05); /* Efeito de zoom no hover */
+}
+
+#searchButton:active {
+    transform: scale(0.95); /* Efeito de clique */
+}

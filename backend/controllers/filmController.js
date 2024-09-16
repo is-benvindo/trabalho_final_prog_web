@@ -44,7 +44,7 @@ exports.getFilmById = async (req, res) => {
 };
 
 // Função para buscar filmes populares
-exports.getPopularFilms = async () => {
+exports.getPopularFilms = async (req, res) => {  // Corrigido
     try {
         const filmesPopulares = await filmService.fetchPopularFilms();
         res.json(filmesPopulares);
