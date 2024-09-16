@@ -38,3 +38,23 @@ exports.deleteComment = (id) => {
     }
     return false;
 };
+
+const replies = []; // Array para armazenar respostas em memória
+
+// Adicionar uma resposta
+exports.addReply = (comentarioId, autor, texto) => {
+    const novaResposta = {
+        id: replies.length + 1,
+        comentarioId,
+        autor,
+        texto,
+        criadoEm: new Date()
+    };
+    replies.push(novaResposta);
+    return novaResposta;
+};
+
+// Obter respostas por ID do comentário
+exports.getRepliesByCommentId = (comentarioId) => {
+    return replies.filter(reply => reply.comentarioId === parseInt(comentarioId));
+};

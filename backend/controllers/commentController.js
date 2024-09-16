@@ -56,3 +56,28 @@ exports.deleteComment = (req, res) => {
         res.status(500).json({ error: 'Erro ao excluir comentário' });
     }
 };
+
+exports.createReply = (req, res) => {
+    const { comentarioId, autor, texto } = req.body;
+    if (!comentarioId || !autor || !texto) {
+        return res.status(400).json({ message: 'Comentário ID, autor e texto são obrigatórios' });
+    }
+    try {
+        const novaResposta = commentService.addReply(comentarioId, autor, texto);
+        res.status(201).json(novaResposta);
+    } catch (error) {
+        console.error('Erro ao criar resposta:', error);
+        res.status(500).json({ error: 'Erro ao criar resposta' });
+    }
+};
+
+exports.getRepliesByCommentId = (req, res) => {
+    const comentarioId = req.params.comentarioId;
+    try {
+        const respostas = commentService.getRepliesByCommentId(comentarioId);
+        res.json(respostas);
+    } catch (error) {
+        console.error('Erro ao buscar respostas:', error);
+        res.status(500).json({ error: 'Erro ao buscar respostas' });
+    }
+};
