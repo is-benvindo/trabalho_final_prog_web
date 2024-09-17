@@ -1,4 +1,3 @@
-// commentRoutes.js
 const express = require('express');
 const router = express.Router();
 const commentController = require('../controllers/commentController');
@@ -7,7 +6,7 @@ const commentController = require('../controllers/commentController');
 router.post('/comentarios', commentController.createComment);
 
 // Rota para obter comentários por ID da postagem
-router.get('/comentarios/:postagemId', commentController.getCommentsByPostagemId);
+router.get('/comentarios/:postagemId', commentController.getCommentsByReviewId);
 
 // Rota para atualizar um comentário
 router.put('/comentarios/:id', commentController.updateComment);

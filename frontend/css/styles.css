@@ -152,3 +152,127 @@ button:hover {
 #searchButton:active {
     transform: scale(0.95); /* Efeito de clique */
 }
+
+/* styles.css */
+/* Modal Styles */
+/* Estilos para o modal */
+.modal {
+    display: none; /* Oculto por padrão */
+    position: fixed; /* Fixa na tela */
+    z-index: 1; /* Sobrepõe outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Habilita rolagem se necessário */
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo preto com opacidade */
+}
+
+/* Conteúdo do modal - ajustado para ser menor */
+.modal-content {
+    background-color: #2e2e2e; /* Fundo escuro */
+    margin: 5% auto; /* Centralizado com menos margem superior */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%; /* Largura menor */
+    max-width: 400px; /* Reduzido o tamanho máximo */
+    color: #fff; /* Texto branco */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); /* Sombras */
+}
+
+/* Estilo da imagem dentro do modal */
+.modal-content img {
+    max-width: 100%; /* Imagem responsiva */
+    height: auto;
+}
+
+/* Botão de fechar o modal */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px; /* Reduzido o tamanho da fonte */
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Formulário de comentários */
+.comment-form {
+    margin-top: 20px;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: calc(100% - 22px); /* Largura total menos o padding */
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #3a3a3a; /* Fundo escuro para os campos de input */
+    color: #fff; /* Texto claro */
+    border: 1px solid #555; /* Bordas escuras */
+    border-radius: 4px;
+}
+
+.comment-form input::placeholder,
+.comment-form textarea::placeholder {
+    color: #bbb; /* Cor do placeholder mais clara */
+}
+
+.comment-form button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Fundo verde */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+    background-color: #45a049; /* Verde mais escuro */
+}
+
+/* Estilo dos comentários no modal */
+.comments {
+    margin-top: 15px;
+    max-height: 250px; /* Limite de altura ajustado */
+    overflow-y: auto; /* Adiciona rolagem se necessário */
+    background-color: #383838; /* Fundo escuro para a área de comentários */
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.comment {
+    background-color: #444444; /* Fundo cinza escuro para cada comentário */
+    color: #e5e5e5; /* Texto claro */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para os comentários */
+}
+
+.comment p {
+    margin: 0;
+}
+
+.comment button {
+    background-color: #1db954;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 0.8em;
+    transition: background-color 0.3s ease;
+}
+
+.comment button:hover {
+    background-color: #17a44a;
+}

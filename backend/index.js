@@ -2,7 +2,8 @@
 const express = require('express');
 const path = require('path');
 const filmRoutes = require('./routes/filmRoutes');
-const commentRoutes = require('./routes/commentRoutes'); // Importar as rotas de comentários
+const commentRoutes = require('./routes/commentRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,9 @@ app.use('/api', filmRoutes);
 
 // Usar as rotas de comentários
 app.use('/api', commentRoutes);
+
+// Usar as rotas de resenhas
+app.use('/api', reviewRoutes);
 
 // Rota para servir o arquivo HTML (interface frontend)
 app.get('/', (req, res) => {
