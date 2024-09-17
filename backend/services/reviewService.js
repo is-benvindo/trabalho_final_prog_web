@@ -41,6 +41,7 @@ exports.addReview = (filmeId, autor, texto) => {
 
 // Obter resenhas por ID do filme
 exports.getReviewsByMovieId = (movieId) => {
+    const reviews = loadReviews();
     return reviews.filter(review => review.filmeId === parseInt(movieId));
 };
 

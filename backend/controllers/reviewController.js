@@ -12,19 +12,18 @@ exports.createReview = (req, res) => {
         console.error('Erro ao criar resenha:', error);
         res.status(500).json({ error: 'Erro ao criar resenha' });
     }
-}
+};
 
 exports.getReviewsByMovieId = (req, res) => {
-    const movieId = req.params.movieId;
+    const movieId = req.params.filmeId;
     try {
         const reviews = reviewService.getReviewsByMovieId(movieId);
-        console.log(reviews);
         res.json(reviews);
     } catch (error) {
         console.error('Erro ao buscar resenhas:', error);
         res.status(500).json({ error: 'Erro ao buscar resenhas' });
     }
-}
+};
 
 exports.updateReview = (req, res) => {
     const reviewId = req.params.id;
