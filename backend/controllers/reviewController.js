@@ -18,6 +18,7 @@ exports.getReviewsByMovieId = (req, res) => {
     const movieId = req.params.movieId;
     try {
         const reviews = reviewService.getReviewsByMovieId(movieId);
+        console.log(reviews);
         res.json(reviews);
     } catch (error) {
         console.error('Erro ao buscar resenhas:', error);

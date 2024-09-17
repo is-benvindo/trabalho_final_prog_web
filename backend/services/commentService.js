@@ -1,17 +1,26 @@
 const fs = require('fs');
-const filePath = '../../src/data/comments.json';
+const path = require('path');
+
+const directoryPath = path.join(__dirname, '../../data');
+const filePath = path.join(directoryPath, 'comments.json');
+
+// Criar o arquivo se não existir
+const ensureFileExists = () => {
+    if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, JSON.stringify([]));
+    }
+};
 
 // Carregar comentários do arquivo
 const loadComments = () => {
-    if (fs.existsSync(filePath)) {
-        const data = fs.readFileSync(filePath, 'utf-8');
-        return JSON.parse(data);
-    }
-    return [];
+    ensureFileExists();
+    const data = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(data);
 };
 
 // Salvar comentários no arquivo
 const saveComments = (comments) => {
+    ensureFileExists();
     fs.writeFileSync(filePath, JSON.stringify(comments, null, 2));
 };
 
@@ -67,24 +76,4 @@ exports.deleteCommentsByReviewId = (reviewId) => {
         return true;
     }
     return false;
-};
-
-const replies = []; // Array para armazenar respostas em memória
-
-// Adicionar uma resposta
-exports.addReply = (comentarioId, autor, texto) => {
-    const novaResposta = {
-        id: replies.length + 1,
-        comentarioId,
-        autor,
-        texto,
-        criadoEm: new Date()
-    };
-    replies.push(novaResposta);
-    return novaResposta;
-};
-
-// Obter respostas por ID do comentário
-exports.getRepliesByCommentId = (comentarioId) => {
-    return replies.filter(reply => reply.comentarioId === parseInt(comentarioId));
 };

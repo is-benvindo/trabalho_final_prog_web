@@ -15,9 +15,3 @@ router.put('/comentarios/:id', commentController.updateComment);
 router.delete('/comentarios/:id', commentController.deleteComment);
 
 module.exports = router;
-
-// Rota para criar uma nova resposta
-router.post('/comentarios/respostas', commentController.createReply);
-
-// Rota para obter respostas por ID do comentário
-router.get('/comentarios/respostas/:comentarioId', commentController.getRepliesByCommentId);
