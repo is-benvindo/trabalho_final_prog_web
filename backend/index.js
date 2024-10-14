@@ -1,9 +1,10 @@
-// index.js
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const filmRoutes = require('./routes/filmRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
+const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,9 @@ app.use('/api', commentRoutes);
 
 // Usar as rotas de resenhas
 app.use('/api', reviewRoutes);
+
+// Usar as rotas de autenticação
+app.use('/api/auth', authRoutes); // Adicionar as rotas de autenticação
 
 // Rota para servir o arquivo HTML (interface frontend)
 app.get('/', (req, res) => {
