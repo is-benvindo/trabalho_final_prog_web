@@ -9,7 +9,7 @@ router.get('/filmes/:titulo', filmController.getFilmsByTitle);
 router.get('/filme/:id', filmController.getFilmById);
 
 // Rota para buscar filmes populares
-router.get('/filmes/populares', filmController.getPopularFilms);
+router.get('/popular', filmController.getPopularFilms);
 
 // Exportar o módulo de rotas
 module.exports = router;

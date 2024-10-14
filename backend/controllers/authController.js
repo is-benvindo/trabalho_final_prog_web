@@ -10,7 +10,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Função para registrar um usuário
-// Função para registrar um usuário
 const registerUser = async (username, email, password) => {
     // Hash a senha
     const hashedPassword = await bcrypt.hash(password, 10);

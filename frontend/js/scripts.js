@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Inicializar a busca de posts
-    fetchPosts();
+    fetchPopularFilms();
 
     // Adicionar evento de clique no botão de busca
     document.getElementById('searchButton').addEventListener('click', () => {
         const searchTerm = document.getElementById('searchInput').value.trim();
         if (searchTerm) {
-            fetchPosts(searchTerm);
+            fetchFilmsByQuery(searchTerm);
         }
+        document.getElementById('searchInput').value = '';
     });
 
     setupModal();
@@ -24,86 +25,79 @@ function setupModal() {
     });
 }
 
-// Função para abrir o modal com os detalhes do filme
-function openFilmModal(filmeId) {
-    fetchFilmDetails(filmeId);
+// Função para exibir os filmes populares
+fetchPopularFilms = async () => {
+    fetchFilms('http://localhost:3000/api/popular');
 }
 
+// Função para buscar filmes por query
+fetchFilmsByQuery = async (query) => {
+    fetchFilms(`http://localhost:3000/api/filmes/${query}`);
+}
 
-// Função para buscar os filmes
-async function fetchPosts(query = 'o') {
+// Função genérica para buscar filmes
+async function fetchFilms(url) {
     try {
-        const response = await fetch(`http://localhost:3000/api/filmes/${query}`);
-        const posts = await response.json();
+        const response = await fetch(url);
+        const films = await response.json();
         const postsContainer = document.getElementById('postsContainer');
 
-        postsContainer.innerHTML = posts.map(post => `
-            <div class="post" onclick="openFilmModal('${post.id}')">
-                <img src="${post.poster}" alt="${post.title} Poster" class="poster">
+        postsContainer.innerHTML = films.map(film => `
+            <div class="post" onclick="fetchFilmDetails('${film.id}')">
+                <img src="${film.poster}" alt="${film.title} Poster" class="poster">
                 <div class="post-info">
-                    <h2>${post.title}</h2>
-                    <p style="font-size: 16px; margin-top: 0px">${post.year}</p>
-                    <button onclick="fetchFilmDetails('${post.id}')">Ver detalhes</button>
+                    <h2>${film.title}</h2>
+                    <p style="font-size: 16px; margin-top: 0px">${film.year}</p>
+                    <button>Ver detalhes</button>
                 </div>
             </div>
         `).join('');
     } catch (error) {
-        console.log('Erro ao buscar os posts', error);
+        console.log('Erro ao buscar os filmes', error);
     }
 }
 
 // Função para buscar detalhes do filme e resenhas
 async function fetchFilmDetails(filmeId) {
     try {
-        const [filmResponse, reviewsResponse] = await Promise.all([
-            fetch(`http://localhost:3000/api/filme/${filmeId}`),
-            fetch(`http://localhost:3000/api/resenhas/${filmeId}`)
-        ]);
-        
+        const filmResponse = await fetch(`http://localhost:3000/api/filme/${filmeId}`);
         const filmDetails = await filmResponse.json();
-
-        const modalContent = document.querySelector('.modal-content');
-
-        if (modalContent) {
-            modalContent.innerHTML = `
-                <div class="modal-landscape">
-                    <img src="${filmDetails.poster}" alt="${filmDetails.title} Poster" class="poster-modal">
-                    <div class="film-info">
-                        <p><strong>Título:</strong> ${filmDetails.title}</p>
-                        <p><strong>Diretor:</strong> ${filmDetails.director}</p>
-                        <p><strong>Sinopse:</strong> ${filmDetails.synopsis}</p>
-                        <p><strong>Avaliação IMDb:</strong> ${filmDetails.rating}</p>
-                    </div>
-                </div>
-
-                <!-- Seção de resenhas -->
-                <div class="reviews-section">
-                    <h3>Resenhas</h3>
-                    <div id="reviewsContainer">
-                        <!-- Resenhas serão carregadas aqui -->
-                    </div>
-                </div>
-
-                <!-- Formulário para adicionar resenha -->
-                <div class="comment-form">
-                    <input type="text" id="reviewAuthor" placeholder="Seu nome">
-                    <textarea id="reviewText" placeholder="Sua resenha"></textarea>
-                    <button onclick="submitReviewForm('${filmeId}')">Enviar Resenha</button>
-                </div>
-            `;
-
-            // Exibir o modal
-            document.getElementById('filmModal').style.display = 'block';
-            loadReviews(filmeId); // Carregar resenhas após exibir o modal
-        } else {
-            console.error('Conteúdo do modal não encontrado');
-        }
+        renderFilmModal(filmDetails, filmeId); // Renderizar modal com detalhes do filme
     } catch (error) {
         console.log('Erro ao buscar detalhes do filme ou resenhas', error);
     }
 }
 
-// Funções de resenhas
+// Função para renderizar o modal de detalhes do filme
+async function renderFilmModal(filmDetails, filmeId) {
+    const modalContent = document.querySelector('.modal-content');
+    if (modalContent) {
+        modalContent.innerHTML = `
+            <div class="modal-landscape">
+                <img src="${filmDetails.poster}" alt="${filmDetails.title} Poster" class="poster-modal">
+                <div class="film-info">
+                    <p><strong>Título:</strong> ${filmDetails.title}</p>
+                    <p><strong>Diretor:</strong> ${filmDetails.director}</p>
+                    <p><strong>Sinopse:</strong> ${filmDetails.synopsis}</p>
+                    <p><strong>Avaliação IMDb:</strong> ${filmDetails.rating}</p>
+                </div>
+            </div>
+            <div class="reviews-section">
+                <h3>Resenhas</h3>
+                <div id="reviewsContainer"></div>
+            </div>
+            <div class="comment-form">
+                <input type="text" id="reviewAuthor" placeholder="Seu nome">
+                <textarea id="reviewText" placeholder="Sua resenha"></textarea>
+                <button onclick="submitReviewForm('${filmeId}')">Enviar Resenha</button>
+            </div>
+        `;
+        document.getElementById('filmModal').style.display = 'block';
+        loadReviews(filmeId);
+    }
+}
+
+// Função para carregar resenhas
 async function loadReviews(filmeId) {
     try {
         const response = await fetch(`http://localhost:3000/api/resenhas/${filmeId}`);
@@ -147,8 +141,8 @@ async function addReview(filmeId, author, text) {
     }
 }
 
-// Função para renderizar um modal com o formulário de resenhas
-function submitReviewForm(filmeId) {
+// Função para enviar uma nova resenha
+async function submitReview(filmeId) {
     const author = document.getElementById('reviewAuthor').value;
     const text = document.getElementById('reviewText').value;
     if (author && text) {
@@ -201,7 +195,38 @@ async function deleteReview(reviewId, filmeId) {
     }
 }
 
-// Funções de comentários
+// Função para renderizar um modal com os comentários de uma resenha
+async function renderCommentsModal(reviewId) {
+    try {
+        const modalContent = document.querySelector('.modal-content');
+
+        if (modalContent) {
+            modalContent.innerHTML = `
+                <div class="comments-section">
+                    <h3>Comentários da Resenha</h3>
+                    <div id="commentsContainer-${reviewId}">
+                        <!-- Comentários serão carregados aqui -->
+                    </div>
+                </div>
+
+                <div class="comment-form">
+                    <input type="text" id="commentAuthor" placeholder="Seu nome">
+                    <textarea id="commentText" placeholder="Seu comentário"></textarea>
+                    <button onclick="submitCommentForm('${reviewId}')">Enviar Comentário</button>
+                </div>
+            `;
+            
+            loadComments(reviewId); // Carregar comentários após exibir o modal
+
+        } else {
+            console.error('Conteúdo do modal não encontrado');
+        }
+    } catch (error) {
+        console.log('Erro ao carregar comentários', error);
+    }
+}
+
+// Função para carregar comentários de uma resenha
 async function loadComments(reviewId) {
     try {
         const response = await fetch(`http://localhost:3000/api/comentarios/${reviewId}`);
@@ -222,38 +247,20 @@ async function loadComments(reviewId) {
     }
 }
 
-// Função para renderizar um 'modal' com os comentários de uma resenha
-async function renderCommentsModal(reviewId) {
-    try {
-        const response = await fetch(`http://localhost:3000/api/comentarios/${reviewId}`);
-        const modalContent = document.querySelector('.modal-content');
-
-        if (modalContent) {
-            modalContent.innerHTML = `
-                <div class="comments-section">
-                    <h3>Comentários da Resenha</h3>
-                    <div id="commentsContainer-${reviewId}">
-                        <!-- Comentários serão carregados aqui -->
-                    </div>
-                </div>
-
-                <div class="comment-form">
-                    <input type="text" id="commentAuthor" placeholder="Seu nome">
-                    <textarea id="commentText" placeholder="Seu comentário"></textarea>
-                    <button onclick="submitComment('${reviewId}')">Enviar Comentário</button>
-                </div>
-            `;
-
-            loadComments(reviewId); // Carregar comentários após exibir o modal
-        } else {
-            console.error('Conteúdo do modal não encontrado');
-        }
-    } catch (error) {
-        console.log('Erro ao carregar comentários', error);
+// Função para enviar um novo comentário
+async function submitCommentForm(reviewId) {
+    const author = document.getElementById('commentAuthor').value;
+    const text = document.getElementById('commentText').value;
+    if (author && text) {
+        addComment(reviewId, author, text);
+        document.getElementById('commentAuthor').value = '';
+        document.getElementById('commentText').value = '';
+    } else {
+        console.log('Por favor, preencha todos os campos.');
     }
 }
 
-
+// Função para adicionar um novo comentário
 async function addComment(reviewId, author, text) {
     try {
         const response = await fetch('http://localhost:3000/api/comentarios', {
@@ -274,18 +281,7 @@ async function addComment(reviewId, author, text) {
     }
 }
 
-function submitComment(reviewId) {
-    const author = document.getElementById('commentAuthor').value;
-    const text = document.getElementById('commentText').value;
-    if (author && text) {
-        addComment(reviewId, author, text);
-        document.getElementById('commentAuthor').value = '';
-        document.getElementById('commentText').value = '';
-    } else {
-        console.log('Por favor, preencha todos os campos.');
-    }
-}
-
+// Função para editar um comentário existente
 async function editComment(commentId, reviewId) {
     const newText = prompt('Digite o novo texto do comentário:');
     if (newText) {
@@ -309,6 +305,7 @@ async function editComment(commentId, reviewId) {
     }
 }
 
+// Função para excluir um comentário
 async function deleteComment(commentId, reviewId) {
     try {
         const response = await fetch(`http://localhost:3000/api/comentarios/${commentId}`, {
