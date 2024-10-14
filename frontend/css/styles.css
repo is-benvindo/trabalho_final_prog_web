@@ -188,21 +188,6 @@ button:hover {
     height: auto;
 }
 
-/* Botão de fechar o modal */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 24px; /* Reduzido o tamanho da fonte */
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #fff;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 /* Formulário de comentários */
 .comment-form {
     margin-top: 20px;
@@ -236,6 +221,10 @@ button:hover {
 
 .comment-form button:hover {
     background-color: #45a049; /* Verde mais escuro */
+}
+
+#commentsModal {
+    width: 100%; /* Largura total */
 }
 
 /* Estilo dos comentários no modal */

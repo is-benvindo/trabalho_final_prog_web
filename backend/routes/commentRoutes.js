@@ -5,8 +5,8 @@ const commentController = require('../controllers/commentController');
 // Rota para criar um novo comentário
 router.post('/comentarios', commentController.createComment);
 
-// Rota para obter comentários por ID da postagem
-router.get('/comentarios/:postagemId', commentController.getCommentsByReviewId);
+// Rota para obter comentários por ID da resenha
+router.get('/comentarios/:resenhaId', commentController.getCommentsByReviewId);
 
 // Rota para atualizar um comentário
 router.put('/comentarios/:id', commentController.updateComment);

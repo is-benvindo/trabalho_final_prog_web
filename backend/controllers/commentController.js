@@ -1,12 +1,12 @@
 const commentService = require('../services/commentService');
 
 exports.createComment = (req, res) => {
-    const { postagemId, autor, texto } = req.body;
-    if (!postagemId || !autor || !texto) {
+    const { resenhaId, autor, texto } = req.body;
+    if (!resenhaId || !autor || !texto) {
         return res.status(400).json({ message: 'Postagem ID, autor e texto são obrigatórios' });
     }
     try {
-        const novoComentario = commentService.addComment(postagemId, autor, texto);
+        const novoComentario = commentService.addComment(resenhaId, autor, texto);
         res.status(201).json(novoComentario);
     } catch (error) {
         console.error('Erro ao criar comentário:', error);
@@ -15,9 +15,9 @@ exports.createComment = (req, res) => {
 };
 
 exports.getCommentsByReviewId = (req, res) => {
-    const postagemId = req.params.postagemId;
+    const reviewId = req.params.resenhaId;
     try {
-        const comentarios = commentService.getCommentsByReviewId(postagemId);
+        const comentarios = commentService.getCommentsByReviewId(reviewId);
         res.json(comentarios);
     } catch (error) {
         console.error('Erro ao buscar comentários:', error);
