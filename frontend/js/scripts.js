@@ -107,11 +107,15 @@ async function loadReviews(filmeId) {
         if (reviewsContainer) {
             reviewsContainer.innerHTML = reviews.length > 0 ? reviews.map(review => `
                 <div class="review">
-                    <p><strong>${review.autor}:</strong> ${review.texto}</p>
+                    <p style="font-size: large"><strong>${review.autor}</strong><p>
+
+                    <div class="comment-text">
+                        <p>${review.texto}</p>
+                    </div>
+
                     <button onclick="editReview('${review.id}', '${filmeId}')">Editar</button>
                     <button onclick="deleteReview('${review.id}', '${filmeId}')">Excluir</button>
                     <button onclick="renderCommentsModal('${review.id}')">Ver Comentários</button>
-                    <div id="commentsContainer-${review.id}" style="display: none":></div>
                 </div>
             `).join('') : '<p>Nenhuma resenha disponível.</p>';
         }
@@ -142,7 +146,7 @@ async function addReview(filmeId, author, text) {
 }
 
 // Função para enviar uma nova resenha
-async function submitReview(filmeId) {
+async function submitReviewForm(filmeId) {
     const author = document.getElementById('reviewAuthor').value;
     const text = document.getElementById('reviewText').value;
     if (author && text) {
@@ -236,7 +240,12 @@ async function loadComments(reviewId) {
         if (commentsContainer) {
             commentsContainer.innerHTML = comments.length > 0 ? comments.map(comment => `
                 <div class="comment">
-                    <p><strong>${comment.autor}:</strong> ${comment.texto}</p>
+                    <p style="font-size: large"><strong>${comment.autor}</strong><p>
+
+                    <div class="comment-text">
+                        <p>${comment.texto}</p>
+                    </div>
+
                     <button onclick="editComment('${comment.id}', '${reviewId}')">Editar</button>
                     <button onclick="deleteComment('${comment.id}', '${reviewId}')">Excluir</button>
                 </div>

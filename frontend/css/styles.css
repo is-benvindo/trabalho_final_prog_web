@@ -64,20 +64,6 @@ h1 {
     color: #b3b3b3; /* Texto cinza claro */
 }
 
-/* Comentários */
-.comments {
-    margin-top: 15px;
-}
-
-.comment {
-    background-color: #333333; /* Fundo cinza médio */
-    color: #e5e5e5; /* Texto claro */
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    font-size: 0.9em;
-}
-
 /* Detalhes do filme (diretor, sinopse, etc.) */
 .film-details p {
     font-size: 0.85em;
@@ -195,6 +181,7 @@ button:hover {
 
 .comment-form input,
 .comment-form textarea {
+    font-family: Arial, Helvetica, sans-serif;
     width: calc(100% - 22px); /* Largura total menos o padding */
     margin-bottom: 10px;
     padding: 10px;
@@ -223,21 +210,7 @@ button:hover {
     background-color: #45a049; /* Verde mais escuro */
 }
 
-#commentsModal {
-    width: 100%; /* Largura total */
-}
-
-/* Estilo dos comentários no modal */
-.comments {
-    margin-top: 15px;
-    max-height: 250px; /* Limite de altura ajustado */
-    overflow-y: auto; /* Adiciona rolagem se necessário */
-    background-color: #383838; /* Fundo escuro para a área de comentários */
-    padding: 10px;
-    border-radius: 4px;
-}
-
-.comment {
+.review, .comment {
     background-color: #444444; /* Fundo cinza escuro para cada comentário */
     color: #e5e5e5; /* Texto claro */
     padding: 10px;
@@ -247,8 +220,19 @@ button:hover {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para os comentários */
 }
 
-.comment p {
+.review p, .comment p {
     margin: 0;
+}
+
+.comment-text {
+    margin: 10px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    overflow-y: auto;
+    max-height: 200px;
+    scrollbar-width: thin;
+    scrollbar-color: #1db954 #444444;
 }
 
 .comment button {
