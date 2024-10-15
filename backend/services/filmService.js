@@ -1,5 +1,5 @@
 const axios = require('axios');
-const tmdbApiKey = 'f74d1bd0fef9085c7f2da686824c6faf';
+const tmdbApiKey = process.env.TMDB_API_KEY;
 
 // Criar uma instância do axios para a API do TMDb
 const tmdbApi = axios.create({
