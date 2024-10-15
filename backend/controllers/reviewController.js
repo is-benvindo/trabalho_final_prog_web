@@ -7,6 +7,7 @@ exports.createReview = (req, res) => {
     }
     try {
         const novaResenha = reviewService.addReview(filmeId, autor, texto);
+        console.log('Resenha criada:', novaResenha);
         res.status(201).json(novaResenha);
     } catch (error) {
         console.error('Erro ao criar resenha:', error);
