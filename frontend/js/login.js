@@ -1,34 +1,29 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+    const btnSubmit = document.getElementById('btnSubmit');
+    const btnRegister = document.getElementById('btnRegister');
+
+    if (btnRegister) {
+        btnRegister.addEventListener('click', function () {
+            window.location.href = './register.html';
+        });
+    }
+
+    btnSubmit.addEventListener('click', sendForm);
 });
 
+// Função para fazer enviar o formulário
+async function sendForm() {
+    if (btnSubmit) {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
 
-async function registerUser(username, email, password) {
-    try {
-        const response = await fetch('/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, email, password }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            console.log('Usuário registrado com sucesso:', data.user);
-            return data.user; // Retorna os dados do usuário registrado
-        } else {
-            console.error('Erro no registro:', data.error);
-            return null;
+        if (validateForm()) {
+            registerUser(email, password);
         }
-    } catch (error) {
-        console.error('Erro de conexão no registro:', error);
-        return null;
     }
 }
 
-
+// Função para fazer login de usuário
 async function loginUser(email, password) {
     try {
         const response = await fetch('/api/auth/login', {
@@ -43,7 +38,7 @@ async function loginUser(email, password) {
 
         if (response.ok) {
             const token = data.token;
-            console.log('Login bem-sucedido, token JWT:', token);            
+            console.log('Login bem-sucedido, token JWT:', token);
             localStorage.setItem('token', token); // Armazena o token localmente, se necessário
 
             // Redireciona o usuário para a página inicial
@@ -56,7 +51,7 @@ async function loginUser(email, password) {
     }
 }
 
-
+// Função para obter o perfil do usuário
 async function getUserProfile() {
     try {
         const token = localStorage.getItem('token'); // Obtenha o token armazenado no login
@@ -94,7 +89,7 @@ function logoutUser() {
     console.log('Usuário deslogado');
 }
 
-
+// Função para validar o formulário de login
 function validateForm() {
     let isValid = true;
 

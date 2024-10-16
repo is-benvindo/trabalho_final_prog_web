@@ -38,9 +38,10 @@ label {
     font-size: 1.2em;
 }
 
+input[type="text"],
 input[type="email"],
 input[type="password"] {
-    width: calc(100% - 20px);
+    width: calc(100% - 5px);
     padding: 10px;
     font-size: 1em;
     border: 2px solid #1db954;
@@ -52,26 +53,27 @@ input[type="password"] {
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
     border-color: #17a44a;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
-#btnRegister {
+#btnLogin {
     border: none;
     background: none;
     color: #e5e5e5;
     margin-bottom: 15px;
 }
 
-#btnRegister:hover {
+#btnLogin:hover {
     text-decoration: underline;
     cursor: pointer;
 }
 
 #btnSubmit {
-    width: calc(100% - 20px);
+    width: calc(100% - 5px);
     padding: 12px;
     background-color: #1db954;
     border: none;

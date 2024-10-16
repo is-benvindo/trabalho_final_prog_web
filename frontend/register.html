@@ -4,28 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/login.css" rel="stylesheet">
+    <link href="css/register.css" rel="stylesheet">
     <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
-    <script src="js/login.js" defer></script>
+    <script src="js/register.js"></script>
     <title>MovieMinds</title>
 </head>
 
 <body>
-    <h1>Entrar</h1>
+    <h1>Cadastrar</h1>
     <div class="login-container">
         <form id="loginForm" onsubmit="return validateForm()">
+
+            <!-- Campo para nome -->
+            <div class="form-group">
+                <label for="name">Nome de usuário:</label>
+                <input type="text" id="name" name="name" placeholder="Digite seu nome" required>
+                <div id="nameError" class="error"></div>
+            </div>
+
+            <!-- Campo para email -->
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Digite seu email" required>
                 <div id="emailError" class="error"></div>
             </div>
+
+            <!-- Campo para senha -->
             <div class="form-group">
                 <label for="password">Senha:</label>
                 <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
                 <div id="passwordError" class="error"></div>
             </div>
 
-            <button id="btnRegister">Não possui uma conta? Clique aqui.</button>
+            <button id="btnLogin">Já possui uma conta? Clique aqui.</button>
 
             <button id="btnSubmit" type="submit">Entrar</button>
         </form>
