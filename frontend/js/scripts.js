@@ -27,12 +27,12 @@ function setupModal() {
 
 // Função para exibir os filmes populares
 fetchPopularFilms = async () => {
-    fetchFilms('http://localhost:3000/api/popular');
+    fetchFilms('/api/popular');
 }
 
 // Função para buscar filmes por query
 fetchFilmsByQuery = async (query) => {
-    fetchFilms(`http://localhost:3000/api/filmes/${query}`);
+    fetchFilms(`/api/filmes/${query}`);
 }
 
 // Função genérica para buscar filmes
@@ -60,7 +60,7 @@ async function fetchFilms(url) {
 // Função para buscar detalhes do filme e resenhas
 async function fetchFilmDetails(filmeId) {
     try {
-        const filmResponse = await fetch(`http://localhost:3000/api/filme/${filmeId}`);
+        const filmResponse = await fetch(`/api/filme/${filmeId}`);
         const filmDetails = await filmResponse.json();
         renderFilmModal(filmDetails, filmeId); // Renderizar modal com detalhes do filme
     } catch (error) {
@@ -100,7 +100,7 @@ async function renderFilmModal(filmDetails, filmeId) {
 // Função para carregar resenhas
 async function loadReviews(filmeId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/resenhas/${filmeId}`);
+        const response = await fetch(`/api/resenhas/${filmeId}`);
         const reviews = await response.json();
         const reviewsContainer = document.getElementById('reviewsContainer');
 
@@ -127,7 +127,7 @@ async function loadReviews(filmeId) {
 // Função para adicionar uma nova resenha
 async function addReview(filmeId, author, text) {
     try {
-        const response = await fetch('http://localhost:3000/api/resenhas', {
+        const response = await fetch('/api/resenhas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -163,7 +163,7 @@ async function editReview(reviewId, filmeId) {
     const newText = prompt('Digite o novo texto da resenha:');
     if (newText) {
         try {
-            const response = await fetch(`http://localhost:3000/api/resenhas/${reviewId}`, {
+            const response = await fetch(`/api/resenhas/${reviewId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -185,7 +185,7 @@ async function editReview(reviewId, filmeId) {
 // Função para excluir uma resenha
 async function deleteReview(reviewId, filmeId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/resenhas/${reviewId}`, {
+        const response = await fetch(`/api/resenhas/${reviewId}`, {
             method: 'DELETE'
         });
 
@@ -233,7 +233,7 @@ async function renderCommentsModal(reviewId) {
 // Função para carregar comentários de uma resenha
 async function loadComments(reviewId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/comentarios/${reviewId}`);
+        const response = await fetch(`/api/comentarios/${reviewId}`);
         const comments = await response.json();
         const commentsContainer = document.getElementById(`commentsContainer-${reviewId}`);
 
@@ -272,7 +272,7 @@ async function submitCommentForm(reviewId) {
 // Função para adicionar um novo comentário
 async function addComment(reviewId, author, text) {
     try {
-        const response = await fetch('http://localhost:3000/api/comentarios', {
+        const response = await fetch('/api/comentarios', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -295,7 +295,7 @@ async function editComment(commentId, reviewId) {
     const newText = prompt('Digite o novo texto do comentário:');
     if (newText) {
         try {
-            const response = await fetch(`http://localhost:3000/api/comentarios/${commentId}`, {
+            const response = await fetch(`/api/comentarios/${commentId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -317,7 +317,7 @@ async function editComment(commentId, reviewId) {
 // Função para excluir um comentário
 async function deleteComment(commentId, reviewId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/comentarios/${commentId}`, {
+        const response = await fetch(`/api/comentarios/${commentId}`, {
             method: 'DELETE'
         });
 
